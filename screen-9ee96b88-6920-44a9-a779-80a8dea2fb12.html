@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vinci Community Onboarding Flow</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/x-icon" href=>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+  <script>
+    window.addEventListener('load', async () => {
+        const formTitle = "undefined";
+        const ignore = ["#", "WEB3_CONNECT_MODAL_ID", "template", "inputNext", "eth", "sol", "error-text", "discordU", "twitterU", "linkedTwitter", "linkedDiscord", "but", "complete",  "completeC", "completeT",  "completeC1"];
+        var allElements = document.querySelectorAll('*[id]');
+        for (var i = 0, n = allElements.length; i < n; ++i) {
+            var el = allElements[i];
+            var result = ignore.filter(function(item){
+                return item.indexOf(el.id.split('----')[0]) > -1;            
+            });
+            if (result.length === 0) {
+                if (el.id && el.tagName === "BUTTON") {
+                    document.querySelector("#" + el.id).addEventListener("click", addUserDecision);
+                }
+            }
+        }
+        init(); 
+        if(document.querySelector("#eth") !== null){
+            document.querySelector("#eth").addEventListener("click", onConnect);
+        }
+        if(document.querySelector("#inputNext") !== null && document.querySelector("#completeC") !== null){
+            document.querySelector("#inputNext").addEventListener("click", checkUserInputComplete);
+            if(document.querySelector("#completeC") !== null){
+                let emoji = "🚀"
+                if(emoji !== null){
+                    emoji = [emoji];
+                }else{
+                    emoji = null;
+                }
+                const completeMessage = "Thank you for completing the onboarding! You can now close this page.";
+                document.querySelector("#completeC").addEventListener("click", function(e){
+                    confettiComplete(event, emoji, completeMessage)
+                    e.preventDefault();
+                    return false;
+                });
+            }
+        }else{
+            if(document.querySelector("#inputNext") !== null){
+                document.querySelector("#inputNext").addEventListener("click", checkUserInput);
+            }
+            if(document.querySelector("#completeC") !== null){
+                let emoji = "🚀"
+                if(emoji !== null){
+                    emoji = [emoji];
+                }else{
+                    emoji = null;
+                }
+                const completeMessage = "Thank you for completing the onboarding! You can now close this page.";
+                document.querySelector("#completeC").addEventListener("click", function(e){
+                    confettiComplete(event, emoji, completeMessage)
+                    e.preventDefault();
+                    return false;
+                });
+            }
+        }
+        if(document.querySelector("#sol") !== null){
+            document.querySelector("#sol").addEventListener("click", onSolConnect);
+        }
+        if(document.querySelector("button[id*='discord']") !== null){
+            document.querySelector("button[id*='discord']").addEventListener("click", function(e){
+                openPopupD(e, formTitle);
+            });
+        }
+        if(document.querySelector("button[id*='twitter']") !== null){
+            document.querySelector("button[id*='twitter']").addEventListener("click", function(e){
+                openPopupT(e, formTitle);
+            });
+        }
+        if(document.querySelector("#completeT") !== null){
+            addxptopath();
+        }
+        
+    });
+    </script>
+    
+    <script>
+    function dontHref(){
+        return false;
+    }
+    </script>
+
+    <script>
+    window.addEventListener('load', async () => {
+        if(document.getElementById('inputNext')){
+            var popupTick = setInterval(function () {
+                let inputs = document.getElementsByClassName('required');
+                let btn =  document.getElementById('inputNext');
+                let isValid = true;
+
+                for (var i = 0; i < inputs.length; i++){
+                    let changedInput = inputs[i];
+                    if (changedInput.value.trim() === "" || changedInput.value === null){
+                        isValid = false;
+                        break;
+                    }
+                }
+                if(document.querySelector("#linkedDiscord") !== null){
+                    const elem = document.querySelector("#linkedDiscord");
+                    var html = elem.innerHTML;
+                    if(html.includes("Linked")){
+                        isValid = true;
+                    }else{
+                        isValid = false;
+                    }
+                }
+                if(document.querySelector("#linkedTwitter") !== null){
+                    const elem = document.querySelector("#linkedTwitter");
+                    var html = elem.innerHTML;
+                    if(html.includes("Linked")){
+                        isValid = true;
+                    }else{
+                        isValid = false;
+                    }
+                }
+                btn.disabled = !isValid;
+            }, 1000);
+        }
+    });
+    </script>
+</head>
+    <body>
+        <script type="text/javascript" src="https://unpkg.com/web3@1.2.11/dist/web3.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/web3modal@1.9.0/dist/index.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.2.1/dist/umd/index.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/fortmatic@2.0.6/dist/fortmatic.js"></script>
+        <script type="text/javascript" src="js/index.js"></script> 
+        <div id="template" class="TemplatesRootRoot baseTop1 baseTop"><img alt="background" style="background-image:url(https://firebasestorage.googleapis.com/v0/b/vinci-prod.appspot.com/o/projectData%2Fvinci-community-onboarding-flow%2Fscreen-9ee96b88-6920-44a9-a779-80a8dea2fb12%2Flogo.png?alt=media&amp;token=f1f74e48-cda5-47e5-9769-ec788be0dd4f)" src="https://firebasestorage.googleapis.com/v0/b/vinci-prod.appspot.com/o/projectData%2Fvinci-community-onboarding-flow%2Fscreen-9ee96b88-6920-44a9-a779-80a8dea2fb12%2Flogo.png?alt=media&amp;token=f1f74e48-cda5-47e5-9769-ec788be0dd4f" class="BrandLogo1 image_ButtonsTemplate"/><div id="completeT" data-xp="70" class="FlexColumn col1"><div class="FlexColumn1 col2"><div class="Text1 title">Example Title</div><div class="Paragraph paragP">Example Subtitle</div></div><div class="FlexRow col3"><div id="embed"><div><div><div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><iframe src="//cdn.iframe.ly/api/iframe?url=https%3A%2F%2Fwww.youtube.com%2Fembed%2FxuYRyef-xf4&key=095dd267b0c00423f8c6bebebb69ac13" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;" allowfullscreen scrolling="no" allow="accelerometer *; clipboard-write *; encrypted-media *; gyroscope *; picture-in-picture *;"></iframe></div></div></div></div></div><div class="FlexRow1 row2"><a href="screen-839e5fcc-1c99-417b-b1cd-ad4cf92aef4f.html"><button style="background-color:#0035ff" class="LastWeek4 buttonContent">Back</button></a><a id="completeC" href="completeC"><button style="background-color:#0035ff" class="LastWeek4 buttonContent" id="completeC">Complete</button></a></div></div></div>
+    </body>
+</html>
