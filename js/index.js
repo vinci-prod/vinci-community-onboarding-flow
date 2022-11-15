@@ -178,7 +178,7 @@ async function addUserDecision(event) {
 
 function openPopupD(e, formTitle) {
     var allIds = {};
-    if(window.location.host === "vinci-onboarding-repos.github.io") {    
+    if(window.location.host === "vinci-onboarding-repos.github.io" || window.location.host === "vinci-prod.github.io") { 
         href = window.location.origin + '/' + window.location.pathname.split('/')[1];
     } else {
         href = window.location.origin;
@@ -221,7 +221,7 @@ function openPopupT(e, formTitle) {
     var allIds = {};
     var href = '';
     console.log(window.location);
-    if(window.location.host === "vinci-onboarding-repos.github.io") {    
+    if(window.location.host === "vinci-onboarding-repos.github.io" || window.location.host === "vinci-prod.github.io") {    
         href = window.location.origin + '/' + window.location.pathname.split('/')[1];
     } else {
         href = window.location.origin;
