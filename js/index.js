@@ -220,6 +220,7 @@ function openPopupD(e, formTitle) {
 function openPopupT(e, formTitle) {
     var allIds = {};
     var href = '';
+    console.log(window.location);
     if(window.location.host === "vinci-onboarding-repos.github.io") {    
         href = window.location.origin + '/' + window.location.pathname.split('/')[1];
     } else {
